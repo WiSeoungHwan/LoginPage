@@ -45,6 +45,7 @@ class SignUpViewController: UIViewController {
         return textField 
     }
     
+    var textFields = [UITextField]()
     
     // MARK: - Methods
     
@@ -58,6 +59,8 @@ class SignUpViewController: UIViewController {
     // MARK: other Func
     
     func configure(){
+        
+        settingTextFields()
         
         // stackView
         
@@ -76,8 +79,14 @@ class SignUpViewController: UIViewController {
         // UI
         animateImageView()
         autoLayout()
-        
-        
+
+    }
+    
+    func settingTextFields(){
+        textFields.append(nameTextField)
+        textFields.append(idTextField)
+        textFields.append(pwTextField)
+        textFields.append(phoneNumTextField)
         
     }
     
@@ -94,6 +103,7 @@ class SignUpViewController: UIViewController {
         let height = textField.heightAnchor.constraint(equalToConstant: 50)
         height.isActive = true
         height.priority = UILayoutPriority(rawValue: 999)
+        textField.delegate = self
 
         return textField
     }
@@ -121,5 +131,16 @@ class SignUpViewController: UIViewController {
         self.stackView.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -250).isActive = true
     }
 
+}
+
+extension SignUpViewController: UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
