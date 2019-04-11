@@ -32,21 +32,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
         textField.textColor = .white
-        textField.placeholder = " Id"
+        textField.attributedPlaceholder = NSAttributedString(string: "Id", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.5)])
         textField.leftView = UIImageView(image: UIImage(named: "user"))
-        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         textField.leftViewMode = .always
         return textField
     }()
+    
     var pwTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
         textField.textColor = .white
-        textField.placeholder = " Password"
+        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.5)])
         textField.leftView = UIImageView(image: UIImage(named: "lock"))
-        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         textField.leftViewMode = .always
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -54,10 +56,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         let button: UIButton = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 5
-        button.backgroundColor = UIColor.orange
+        button.backgroundColor = .orange
         button.setTitle("Login", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        return button
+    }()
+    
+    var signUpButton: UIButton = {
+        let button: UIButton = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
+        button.setTitle("Sign Up", for: .normal)
+        button.setTitleColor( .white, for: .normal)
+        button.setTitleColor( UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        button.underlineMyText()
+        button.addTarget(self, action: #selector(signUpButtonDidTap), for: .touchUpInside)
         return button
     }()
     
@@ -83,10 +97,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         self.view.addSubview(idTextField)
         self.view.addSubview(pwTextField)
         self.view.addSubview(loginButton)
+        self.view.addSubview(signUpButton)
         
         // UI
         animateImageView()
         keyboardSetting()
+        uiSetting()
         // autoLayout
         
         autoLayout()
@@ -103,15 +119,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         print("loginButton")
     }
     
+    @objc private func signUpButtonDidTap(_ sender: UIButton){
+        print("signUpButton")
+        let signUpVC = SignUpViewController()
+        present(signUpVC, animated: true, completion: nil)
+        
+    }
+    
     @objc private func keyboardWillHide(_ sender: Notification){
         self.view.frame.origin.y = 0
     }
     @objc private func keyboardWillShow(_ sender: Notification){
         self.view.frame.origin.y = -150
-        
     }
     
+    
+    
     // MARK: UI
+    
+    func uiSetting(){
+        self.idTextField.layer.cornerRadius = 10
+        self.pwTextField.layer.cornerRadius = 10
+    }
     
     func animateImageView(){
         UIView.animateKeyframes(withDuration: 5, delay: 0, options: [.autoreverse, .repeat], animations: {
@@ -167,11 +196,47 @@ extension LoginViewController{
         self.pwTextField.topAnchor.constraint(equalTo: self.idTextField.bottomAnchor, constant: 5).isActive = true
         self.pwTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
+        // signUpButton
+        
+        self.signUpButton.topAnchor.constraint(equalTo: self.pwTextField.bottomAnchor, constant: 20).isActive = true
+        self.signUpButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
+        
         // loginbutton
         self.loginButton.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
         self.loginButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
         self.loginButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
+        self.loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         self.loginButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -40).isActive = true
         
+        
+    }
+}
+
+
+
+
+
+// MARK: - Other Extention
+
+extension UIButton {
+    func underlineMyText() {
+        guard let text = self.titleLabel?.text else { return }
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: text.count))
+        
+        self.setAttributedTitle(attributedString, for: .normal)
+    }
+}
+
+
+
+extension UILabel {
+    func underlineMyText() {
+        if let textString = self.text {
+            let attributedString = NSMutableAttributedString(string: textString)
+            attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length - 1))
+            attributedText = attributedString
+        }
     }
 }
