@@ -22,6 +22,7 @@ class SignUpViewController: UIViewController {
     var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        print("addStackView")
         return stackView
     }()
     
@@ -40,11 +41,48 @@ class SignUpViewController: UIViewController {
         return textField
     }
     
-    var phoneNumTextField: UITextField {
-        let textField = createTextField("PhoneNumber", UIImage(named: "phone")!)
+    var phoneNumTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
+        textField.textColor = .white
+        textField.attributedPlaceholder = NSAttributedString(string: "PhoneNumTextField", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.5)])
+        textField.leftView = UIImageView(image: UIImage(named: "phone"))
+        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        textField.layer.cornerRadius = 10
+        textField.leftViewMode = .always
+        let height = textField.heightAnchor.constraint(equalToConstant: 50)
+        height.isActive = true
+        height.priority = UILayoutPriority(rawValue: 999)
+        print("addPhoneNumTF")
         return textField 
-    }
+    }()
     
+    var exitButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "exit"), for: .normal)
+        button.addTarget(self, action: #selector(exitButtonDidTap), for: .touchUpInside)
+        return button
+    }()
+    
+    var authRequestButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Authentication", for: .normal)
+        button.setTitleColor(.orange, for: .normal)
+        button.setTitleColor(.white, for: .selected)
+        button.backgroundColor = .white
+        button.layer.borderColor = UIColor.orange.cgColor
+        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 10
+
+        button.addTarget(self, action: #selector(authButtonDidTap(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    var isViewUp = false
     var textFields = [UITextField]()
     
     // MARK: - Methods
@@ -60,24 +98,30 @@ class SignUpViewController: UIViewController {
     
     func configure(){
         
+        // textFeild
         settingTextFields()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIApplication.keyboardWillHideNotification, object: nil)
+        
         
         // stackView
+        
         
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(idTextField)
         stackView.addArrangedSubview(pwTextField)
-        stackView.addArrangedSubview(phoneNumTextField)
         stackView.axis = .vertical
         stackView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
         stackView.distribution = .equalSpacing
+        stackView.spacing = 20
         
         // addSubView
         view.addSubview(backgroundImageView)
         view.addSubview(stackView)
+        view.addSubview(exitButton)
+        view.addSubview(phoneNumTextField)
+        view.addSubview(authRequestButton)
         
         // UI
-        animateImageView()
         autoLayout()
 
     }
@@ -88,6 +132,10 @@ class SignUpViewController: UIViewController {
         textFields.append(pwTextField)
         textFields.append(phoneNumTextField)
         
+        for i in textFields {
+            i.translatesAutoresizingMaskIntoConstraints = false
+            i.delegate = self
+        }
     }
     
     func createTextField(_ placeholder: String, _ leftViewImage: UIImage) -> UITextField {
@@ -108,12 +156,32 @@ class SignUpViewController: UIViewController {
         return textField
     }
     
-    // MARK: UI
-    func animateImageView(){
-        UIView.animateKeyframes(withDuration: 5, delay: 0, options: [.autoreverse, .repeat], animations: {
-            self.backgroundImageView.center.x += 50
-        })
+    // MARK: Action
+    
+    @objc private func keyboardWillHide(_ sender: Notification){
+        self.view.frame.origin.y = 0
+        isViewUp = false
     }
+    @objc private func exitButtonDidTap(_ sender: UIButton){
+        self.dismiss(animated: true, completion: nil)
+    }
+    @objc private func authButtonDidTap(_ sender: UIButton){
+        print("auth")
+        sender.backgroundColor = .orange
+    }
+    
+    // MARK: UI
+    
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for i in self.stackView.subviews{
+            i.resignFirstResponder()
+        }
+        phoneNumTextField.resignFirstResponder()
+    }
+    
+    
     
     func autoLayout(){
         let guide = self.view.safeAreaLayoutGuide
@@ -125,10 +193,29 @@ class SignUpViewController: UIViewController {
         self.backgroundImageView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
         self.backgroundImageView.heightAnchor.constraint(equalToConstant: self.view.frame.height).isActive = true
         
+        //stackView
+        
         self.stackView.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
         self.stackView.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
         self.stackView.topAnchor.constraint(equalTo: guide.topAnchor, constant: 150).isActive = true
         self.stackView.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -250).isActive = true
+        
+        // phoneAuth
+        
+        self.phoneNumTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        self.phoneNumTextField.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
+        self.phoneNumTextField.trailingAnchor.constraint(equalTo: authRequestButton.leadingAnchor, constant: 5).isActive = true
+        
+        self.authRequestButton.leadingAnchor.constraint(equalTo: phoneNumTextField.trailingAnchor, constant: 5).isActive = true
+        self.authRequestButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        self.authRequestButton.topAnchor.constraint(equalTo: phoneNumTextField.topAnchor).isActive = true
+        
+        
+        // exit button
+        self.exitButton.topAnchor.constraint(equalTo: guide.topAnchor, constant: 10).isActive = true
+        self.exitButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
+        self.exitButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        self.exitButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 
 }
@@ -136,6 +223,14 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if !isViewUp{
+//            if textField == self.stackView.subviews[]{
+//                UIView.animate(withDuration: 1) {
+//                    self.view.frame.origin.y = -150
+//                    self.isViewUp = true
+//                }
+//            }
+//        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -84,6 +84,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         configure()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateImageView()
+    }
+    
     // MARK: other func
     private func configure(){
         
@@ -100,7 +105,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         self.view.addSubview(signUpButton)
         
         // UI
-        animateImageView()
         keyboardSetting()
         uiSetting()
         // autoLayout
