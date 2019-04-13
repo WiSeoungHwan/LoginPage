@@ -58,6 +58,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         button.layer.cornerRadius = 5
         button.backgroundColor = .orange
         button.setTitle("Login", for: .normal)
+        button.setTitleColor( UIColor.white.withAlphaComponent(0.5), for: .highlighted)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         return button
@@ -144,6 +145,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     func uiSetting(){
         self.idTextField.layer.cornerRadius = 10
         self.pwTextField.layer.cornerRadius = 10
+        self.idTextField.clearButtonMode = .always
+        self.pwTextField.clearButtonMode = .always
     }
     
     func animateImageView(){
