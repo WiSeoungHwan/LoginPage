@@ -76,6 +76,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         return button
     }()
     
+    var testId = "wi"
+    var testPw = "1111"
+    
     
     // MARK: - Method
     
@@ -121,13 +124,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
     
     @objc private func loginButtonDidTap(_ sender: UIButton){
-        print("loginButton")
+        guard let id = idTextField.text, let pw = pwTextField.text else {return}
+        
+        if id == testId && pw == testPw{
+            print("login Success")
+            let navi = UINavigationController(rootViewController: MyRecipeTableViewController())
+            present(navi, animated: true, completion: nil)
+        }else{
+            print("login Fail")
+        }
     }
     
     @objc private func signUpButtonDidTap(_ sender: UIButton){
         print("signUpButton")
         let signUpVC = SignUpViewController()
         present(signUpVC, animated: true, completion: nil)
+        sender.layoutSubviews()
         
     }
     
@@ -167,6 +179,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         self.idTextField.resignFirstResponder()
         self.pwTextField.resignFirstResponder()
     }
+    
 }
 
 
@@ -214,8 +227,6 @@ extension LoginViewController{
         self.loginButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
         self.loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         self.loginButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -40).isActive = true
-        
-        
     }
 }
 
@@ -246,4 +257,8 @@ extension UILabel {
             attributedText = attributedString
         }
     }
+}
+
+extension UITableViewDelegate{
+    
 }
