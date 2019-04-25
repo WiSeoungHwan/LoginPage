@@ -15,16 +15,17 @@ class AddMyRecipeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+       foodImageView.isUserInteractionEnabled = true
         foodImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewDidTap)))
         
-        self.foodImageView.image = UIImage(named: "backroundImage1")
+        self.foodImageView.image = UIImage(named: "backgroundImage1")
     }
     
     // MARK: Action
     
     @objc private func imageViewDidTap(){
         // 카메라 혹은 앨범에서 이미지 가져오기
-        
+        print("imageTap")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

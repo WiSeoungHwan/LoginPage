@@ -8,11 +8,11 @@
 
 import UIKit
 
-class MyRecipeTableViewController: UITableViewController {
+class MyRecipeViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var array = ["","",""]
+    var array = ["",""]
     
     // MARK: - Methods
     

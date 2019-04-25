@@ -43,7 +43,7 @@ class TextViewTableViewCell: UITableViewCell {
         textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         textView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        textView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        textView.heightAnchor.constraint(equalToConstant: 200).isActive = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

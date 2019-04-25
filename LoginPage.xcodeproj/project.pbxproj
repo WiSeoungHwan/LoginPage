@@ -12,8 +12,9 @@
 		3C346E73225A430B00C88385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C346E72225A430B00C88385 /* AppDelegate.swift */; };
 		3C346E7D225A430C00C88385 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C346E7B225A430C00C88385 /* LaunchScreen.storyboard */; };
 		3C346E85225A436C00C88385 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C346E84225A436C00C88385 /* LoginViewController.swift */; };
+		3C782A57226DBEBB003D7A59 /* NutritionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C782A56226DBEBB003D7A59 /* NutritionTableViewCell.swift */; };
 		3C7F0305225AF3DC00AB2D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C7F0304225AF3DC00AB2D89 /* Assets.xcassets */; };
-		3C85CBA32268287F0090A4A1 /* MyRecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C85CBA22268287F0090A4A1 /* MyRecipeTableViewController.swift */; };
+		3C85CBA32268287F0090A4A1 /* MyRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C85CBA22268287F0090A4A1 /* MyRecipeViewController.swift */; };
 		3C85CBA622685A7B0090A4A1 /* MyRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C85CBA422685A7B0090A4A1 /* MyRecipeTableViewCell.swift */; };
 		3C85CBA722685A7B0090A4A1 /* MyRecipeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C85CBA522685A7B0090A4A1 /* MyRecipeTableViewCell.xib */; };
 		3C85CBA9226995820090A4A1 /* AddMyRecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C85CBA8226995820090A4A1 /* AddMyRecipeTableViewController.swift */; };
@@ -30,8 +31,9 @@
 		3C346E7C225A430C00C88385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C346E7E225A430C00C88385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C346E84225A436C00C88385 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3C782A56226DBEBB003D7A59 /* NutritionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionTableViewCell.swift; sourceTree = "<group>"; };
 		3C7F0304225AF3DC00AB2D89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3C85CBA22268287F0090A4A1 /* MyRecipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeTableViewController.swift; sourceTree = "<group>"; };
+		3C85CBA22268287F0090A4A1 /* MyRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeViewController.swift; sourceTree = "<group>"; };
 		3C85CBA422685A7B0090A4A1 /* MyRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		3C85CBA522685A7B0090A4A1 /* MyRecipeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyRecipeTableViewCell.xib; sourceTree = "<group>"; };
 		3C85CBA8226995820090A4A1 /* AddMyRecipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyRecipeTableViewController.swift; sourceTree = "<group>"; };
@@ -70,12 +72,12 @@
 		3C346E71225A430B00C88385 /* LoginPage */ = {
 			isa = PBXGroup;
 			children = (
-				3CBBE571226D50DE00B802E3 /* Cell */,
+				3CBBE571226D50DE00B802E3 /* MyRecipeCell */,
 				3C346E72225A430B00C88385 /* AppDelegate.swift */,
 				3C346E84225A436C00C88385 /* LoginViewController.swift */,
 				3C1DBA11225F0C7500C3FEFC /* SignUpViewController.swift */,
 				3C06BE5222643A290036D7CB /* MyPageViewController.swift */,
-				3C85CBA22268287F0090A4A1 /* MyRecipeTableViewController.swift */,
+				3C85CBA22268287F0090A4A1 /* MyRecipeViewController.swift */,
 				3C85CBA8226995820090A4A1 /* AddMyRecipeTableViewController.swift */,
 				3C7F0304225AF3DC00AB2D89 /* Assets.xcassets */,
 				3C346E7B225A430C00C88385 /* LaunchScreen.storyboard */,
@@ -84,7 +86,7 @@
 			path = LoginPage;
 			sourceTree = "<group>";
 		};
-		3CBBE571226D50DE00B802E3 /* Cell */ = {
+		3CBBE571226D50DE00B802E3 /* MyRecipeCell */ = {
 			isa = PBXGroup;
 			children = (
 				3C85CBAA22699A070090A4A1 /* AddMyRecipeTableViewCell.swift */,
@@ -92,8 +94,9 @@
 				3C85CBAB22699A070090A4A1 /* AddMyRecipeTableViewCell.xib */,
 				3C85CBA422685A7B0090A4A1 /* MyRecipeTableViewCell.swift */,
 				3C85CBA522685A7B0090A4A1 /* MyRecipeTableViewCell.xib */,
+				3C782A56226DBEBB003D7A59 /* NutritionTableViewCell.swift */,
 			);
-			path = Cell;
+			path = MyRecipeCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,10 +173,11 @@
 			files = (
 				3C1DBA12225F0C7500C3FEFC /* SignUpViewController.swift in Sources */,
 				3C85CBA9226995820090A4A1 /* AddMyRecipeTableViewController.swift in Sources */,
+				3C782A57226DBEBB003D7A59 /* NutritionTableViewCell.swift in Sources */,
 				3C85CBA622685A7B0090A4A1 /* MyRecipeTableViewCell.swift in Sources */,
 				3C85CBAC22699A070090A4A1 /* AddMyRecipeTableViewCell.swift in Sources */,
 				3C346E85225A436C00C88385 /* LoginViewController.swift in Sources */,
-				3C85CBA32268287F0090A4A1 /* MyRecipeTableViewController.swift in Sources */,
+				3C85CBA32268287F0090A4A1 /* MyRecipeViewController.swift in Sources */,
 				3C346E73225A430B00C88385 /* AppDelegate.swift in Sources */,
 				3C06BE5322643A290036D7CB /* MyPageViewController.swift in Sources */,
 				3C85CBAF22699D6C0090A4A1 /* TextViewTableViewCell.swift in Sources */,

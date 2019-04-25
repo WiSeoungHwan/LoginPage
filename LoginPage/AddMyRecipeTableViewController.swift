@@ -9,16 +9,33 @@
 import UIKit
 
 class AddMyRecipeTableViewController: UITableViewController {
-
+    var nutritionNames = [
+        "열량(kcal)",
+        "탄수화물(g)",
+        "식이섬유(g)",
+        "동물성 단백질(g)",
+        "식물성 단백질(g)",
+        "동물성 지방(g)",
+        "식물성 지방(g)",
+        "콜레스테롤(g)",
+        "나트륨(mg)",
+        "칼륨(mg)",
+        "인(mg)",
+        "동물성 칼슘(mg)",
+        "식물성 칼슘(mg)",
+        "동물성 철분(mg)",
+        "식물성 철분(mg)"
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonDidTap))
         self.title = "나만의 식단만들기"
-        self.tableView.separatorColor = .clear
+//        self.tableView.separatorColor = .clear
         
         self.tableView.register(UINib(nibName: "AddMyRecipeTableViewCell", bundle: nil), forCellReuseIdentifier: "menu")
         self.tableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: "textView")
-        
+        self.tableView.register(NutritionTableViewCell.self, forCellReuseIdentifier: "nutrition")
     }
     
     
@@ -37,7 +54,9 @@ class AddMyRecipeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if section == 3 {
+            return nutritionNames.count
+        }
         return 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,6 +67,9 @@ class AddMyRecipeTableViewController: UITableViewController {
         case 1, 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "textView", for: indexPath)
         default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "nutrition", for: indexPath) as! NutritionTableViewCell
+            cell.label.text = nutritionNames[indexPath.row]
+            cell.selectionStyle = .none
             return cell
         }
         cell.selectionStyle = .none

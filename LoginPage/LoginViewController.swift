@@ -128,7 +128,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         
         if id == testId && pw == testPw{
             print("login Success")
-            let navi = UINavigationController(rootViewController: MyRecipeTableViewController())
+            let navi = UINavigationController(rootViewController: MyRecipeViewController())
             present(navi, animated: true, completion: nil)
         }else{
             print("login Fail")
