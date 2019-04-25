@@ -19,34 +19,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         return imageView
     }()
     
-    var exitButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "exit"), for: .normal)
-        button.addTarget(self, action: #selector(exitButtonDidTap), for: .touchUpInside)
-        return button
-    }()
+//    var exitButton: UIButton = {
+//        let button = UIButton(type: .custom)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.setImage(UIImage(named: "exit"), for: .normal)
+//        button.addTarget(self, action: #selector(exitButtonDidTap), for: .touchUpInside)
+//        return button
+//    }()
     
-    var idTextField: UITextField = {
-        let textField = UITextField()
+    var idTextField: InsetTextField = {
+        let textField = InsetTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
-        textField.textColor = .white
-        textField.attributedPlaceholder = NSAttributedString(string: "Id", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.5)])
-        textField.leftView = UIImageView(image: UIImage(named: "user"))
-        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        textField.textColor = .black
+        textField.attributedPlaceholder = NSAttributedString(string: "이메일을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray.withAlphaComponent(0.5)])
+        textField.borderStyle = .roundedRect
+        textField.leftView = UIImageView(image: UIImage(named: "mail"))
+        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         textField.leftViewMode = .always
         return textField
     }()
     
-    var pwTextField: UITextField = {
-        let textField = UITextField()
+    var pwTextField: InsetTextField = {
+        let textField = InsetTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
-        textField.textColor = .white
-        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.5)])
+        textField.textColor = .black
+        textField.attributedPlaceholder = NSAttributedString(string: "비밀번호를 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray.withAlphaComponent(0.5)])
+        textField.borderStyle = .roundedRect
         textField.leftView = UIImageView(image: UIImage(named: "lock"))
-        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        textField.leftView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         textField.leftViewMode = .always
         textField.isSecureTextEntry = true
         return textField
@@ -55,8 +55,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     var loginButton: UIButton = {
         let button: UIButton = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 5
-        button.backgroundColor = .orange
+        button.layer.cornerRadius = 25
+        button.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         button.setTitle("Login", for: .normal)
         button.setTitleColor( UIColor.white.withAlphaComponent(0.5), for: .highlighted)
         button.setTitleColor(.white, for: .normal)
@@ -69,11 +69,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
         button.setTitle("Sign Up", for: .normal)
-        button.setTitleColor( .white, for: .normal)
+        button.setTitleColor( #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1), for: .normal)
         button.setTitleColor( UIColor.white.withAlphaComponent(0.5), for: .highlighted)
         button.underlineMyText()
         button.addTarget(self, action: #selector(signUpButtonDidTap), for: .touchUpInside)
         return button
+    }()
+    
+    var signUpLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.text = "아직 회원이 아니신가요?"
+        return label
     }()
     
     var testId = "wi"
@@ -101,8 +109,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         self.pwTextField.delegate = self
         
         // addSubview
-        self.view.addSubview(backgroundImageView)
-        self.view.addSubview(exitButton)
+//        self.view.addSubview(backgroundImageView)
+//        self.view.addSubview(exitButton)
+        self.view.addSubview(signUpLabel)
         self.view.addSubview(idTextField)
         self.view.addSubview(pwTextField)
         self.view.addSubview(loginButton)
@@ -119,9 +128,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     // MARK: Action
     
-    @objc private func exitButtonDidTap(_ sender: UIButton){
-        self.dismiss(animated: true, completion: nil)
-    }
+//    @objc private func exitButtonDidTap(_ sender: UIButton){
+//        self.dismiss(animated: true, completion: nil)
+//    }
     
     @objc private func loginButtonDidTap(_ sender: UIButton){
         guard let id = idTextField.text, let pw = pwTextField.text else {return}
@@ -193,40 +202,43 @@ extension LoginViewController{
         
         // backgroundImageView
         
-        self.backgroundImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        self.backgroundImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 50).isActive = true
-        self.backgroundImageView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-        self.backgroundImageView.heightAnchor.constraint(equalToConstant: self.view.frame.height).isActive = true
+//        self.backgroundImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+//        self.backgroundImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 50).isActive = true
+//        self.backgroundImageView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+//        self.backgroundImageView.heightAnchor.constraint(equalToConstant: self.view.frame.height).isActive = true
         
         // exit button
-        self.exitButton.topAnchor.constraint(equalTo: guide.topAnchor, constant: 10).isActive = true
-        self.exitButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
-        self.exitButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        self.exitButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        self.exitButton.topAnchor.constraint(equalTo: guide.topAnchor, constant: 10).isActive = true
+//        self.exitButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
+//        self.exitButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+//        self.exitButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         // textField
         
-        self.idTextField.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
-        self.idTextField.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
-        self.idTextField.centerYAnchor.constraint(equalTo: guide.centerYAnchor).isActive = true
-        self.idTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.idTextField.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 30).isActive = true
+        self.idTextField.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -30).isActive = true
+        self.idTextField.bottomAnchor.constraint(equalTo: guide.centerYAnchor).isActive = true
+        self.idTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        self.pwTextField.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
-        self.pwTextField.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
-        self.pwTextField.topAnchor.constraint(equalTo: self.idTextField.bottomAnchor, constant: 5).isActive = true
-        self.pwTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.pwTextField.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 30).isActive = true
+        self.pwTextField.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -30).isActive = true
+        self.pwTextField.topAnchor.constraint(equalTo: guide.centerYAnchor, constant: 20).isActive = true
+        self.pwTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         // signUpButton
+        self.signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
+        self.signUpButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor, constant: 80).isActive = true
         
-        self.signUpButton.topAnchor.constraint(equalTo: self.pwTextField.bottomAnchor, constant: 20).isActive = true
-        self.signUpButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
-        
+        self.signUpLabel.trailingAnchor.constraint(equalTo: signUpButton.leadingAnchor, constant: -5).isActive = true
+        self.signUpLabel.centerYAnchor.constraint(equalTo: signUpButton.centerYAnchor).isActive = true
         // loginbutton
-        self.loginButton.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
-        self.loginButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
+        self.loginButton.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 50).isActive = true
+        self.loginButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -50).isActive = true
         self.loginButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
-        self.loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        self.loginButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -40).isActive = true
+        self.loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.loginButton.topAnchor.constraint(equalTo: pwTextField.bottomAnchor, constant: 40).isActive = true
+        
+        
     }
 }
 
@@ -259,6 +271,19 @@ extension UILabel {
     }
 }
 
-extension UITableViewDelegate{
-    
+
+extension UITextField {
+    func setUnderLine() {
+        let border = CALayer()
+        let width = CGFloat(0.5)
+        border.borderColor = UIColor.lightGray.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width-10, height: self.frame.size.height)
+        
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        border.isHidden = false
+        self.layer.masksToBounds = true
+    }
 }
+
+

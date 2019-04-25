@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3C06BE5322643A290036D7CB /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C06BE5222643A290036D7CB /* MyPageViewController.swift */; };
 		3C1DBA12225F0C7500C3FEFC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DBA11225F0C7500C3FEFC /* SignUpViewController.swift */; };
+		3C2B413F2271834E00B578C8 /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B413E2271834E00B578C8 /* InsetTextField.swift */; };
+		3C2B4141227196EA00B578C8 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B4140227196EA00B578C8 /* TextFieldView.swift */; };
 		3C346E73225A430B00C88385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C346E72225A430B00C88385 /* AppDelegate.swift */; };
 		3C346E7D225A430C00C88385 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C346E7B225A430C00C88385 /* LaunchScreen.storyboard */; };
 		3C346E85225A436C00C88385 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C346E84225A436C00C88385 /* LoginViewController.swift */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		3C06BE5222643A290036D7CB /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		3C1DBA11225F0C7500C3FEFC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3C2B413E2271834E00B578C8 /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
+		3C2B4140227196EA00B578C8 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		3C346E6F225A430B00C88385 /* LoginPage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginPage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C346E72225A430B00C88385 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C346E7C225A430C00C88385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C2B413D2271832100B578C8 /* CustomObject */ = {
+			isa = PBXGroup;
+			children = (
+				3C2B413E2271834E00B578C8 /* InsetTextField.swift */,
+				3C2B4140227196EA00B578C8 /* TextFieldView.swift */,
+			);
+			path = CustomObject;
+			sourceTree = "<group>";
+		};
 		3C346E66225A430B00C88385 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +85,7 @@
 		3C346E71225A430B00C88385 /* LoginPage */ = {
 			isa = PBXGroup;
 			children = (
+				3C2B413D2271832100B578C8 /* CustomObject */,
 				3CBBE571226D50DE00B802E3 /* MyRecipeCell */,
 				3C346E72225A430B00C88385 /* AppDelegate.swift */,
 				3C346E84225A436C00C88385 /* LoginViewController.swift */,
@@ -173,9 +187,11 @@
 			files = (
 				3C1DBA12225F0C7500C3FEFC /* SignUpViewController.swift in Sources */,
 				3C85CBA9226995820090A4A1 /* AddMyRecipeTableViewController.swift in Sources */,
+				3C2B4141227196EA00B578C8 /* TextFieldView.swift in Sources */,
 				3C782A57226DBEBB003D7A59 /* NutritionTableViewCell.swift in Sources */,
 				3C85CBA622685A7B0090A4A1 /* MyRecipeTableViewCell.swift in Sources */,
 				3C85CBAC22699A070090A4A1 /* AddMyRecipeTableViewCell.swift in Sources */,
+				3C2B413F2271834E00B578C8 /* InsetTextField.swift in Sources */,
 				3C346E85225A436C00C88385 /* LoginViewController.swift in Sources */,
 				3C85CBA32268287F0090A4A1 /* MyRecipeViewController.swift in Sources */,
 				3C346E73225A430B00C88385 /* AppDelegate.swift in Sources */,
