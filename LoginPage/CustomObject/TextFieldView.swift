@@ -71,6 +71,7 @@ class TextFieldView: UIView {
         underLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         underLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         underLabel.topAnchor.constraint(equalTo: underLine.bottomAnchor, constant: 10).isActive = true
+        underLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
     }
     
